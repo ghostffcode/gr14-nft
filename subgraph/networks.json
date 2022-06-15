@@ -1,0 +1,15 @@
+{
+  "localhost": {
+    "YourContract": {
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+    },
+    "GR14": {
+      "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+    }
+  },
+  "rinkeby": {
+    "GR14": {
+      "address": "0xa1652C1a7d28f1a52F8F68eDC5e022d8a11BfdF8"
+    }
+  }
+}
