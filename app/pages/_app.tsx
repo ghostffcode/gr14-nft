@@ -8,7 +8,7 @@ import { chain, createClient, configureChains, WagmiConfig } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 import ContractsProvider from '../providers/ContractsProvider/ContractProvider'
-import { Header } from '../components'
+import { Header, Dev } from '../components'
 
 // const chainList = [chain.hardhat, chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum]
 const chainList = [chain.hardhat]
@@ -46,6 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <section className="container px-4 mx-auto mt-20">
               <Component {...pageProps} />
             </section>
+            <Dev />
           </ContractsProvider>
         </RainbowKitProvider>
       </WagmiConfig>
