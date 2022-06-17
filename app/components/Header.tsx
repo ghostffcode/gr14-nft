@@ -7,7 +7,7 @@ import { FC } from 'react'
 
 const navs = [
   { name: 'Home', url: '/' },
-  { name: 'Initialize', url: '/init' },
+  { name: 'Initialize', url: '/initialize' },
 ]
 
 const Header: FC = () => {

@@ -5,7 +5,7 @@
       "chainId": "4",
       "contracts": {
         "GR14": {
-          "address": "0xa1652C1a7d28f1a52F8F68eDC5e022d8a11BfdF8",
+          "address": "0x8fbe45b17d6Da6120D687e5ec8423C1B41cEe6DE",
           "abi": [
             {
               "inputs": [],
@@ -24,7 +24,12 @@
             },
             {
               "inputs": [],
-              "name": "invalidClaim",
+              "name": "invalidSignature",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "notInitialized",
               "type": "error"
             },
             {
@@ -144,6 +149,19 @@
               "type": "function"
             },
             {
+              "inputs": [],
+              "name": "approvedSigner",
+              "outputs": [
+                {
+                  "internalType": "address",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
               "inputs": [
                 {
                   "internalType": "address",
@@ -165,9 +183,9 @@
             {
               "inputs": [
                 {
-                  "internalType": "bytes32[]",
-                  "name": "merkleProof",
-                  "type": "bytes32[]"
+                  "internalType": "bytes",
+                  "name": "signature",
+                  "type": "bytes"
                 }
               ],
               "name": "claim",
@@ -241,14 +259,14 @@
             {
               "inputs": [
                 {
-                  "internalType": "bytes32",
-                  "name": "_merkleRoot",
-                  "type": "bytes32"
-                },
-                {
                   "internalType": "string",
                   "name": "_uri",
                   "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "_approvedSigner",
+                  "type": "address"
                 }
               ],
               "name": "initialize",
@@ -260,19 +278,6 @@
                 }
               ],
               "stateMutability": "nonpayable",
-              "type": "function"
-            },
-            {
-              "inputs": [],
-              "name": "initialized",
-              "outputs": [
-                {
-                  "internalType": "bool",
-                  "name": "",
-                  "type": "bool"
-                }
-              ],
-              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -294,19 +299,6 @@
                   "internalType": "bool",
                   "name": "",
                   "type": "bool"
-                }
-              ],
-              "stateMutability": "view",
-              "type": "function"
-            },
-            {
-              "inputs": [],
-              "name": "merkleRoot",
-              "outputs": [
-                {
-                  "internalType": "bytes32",
-                  "name": "",
-                  "type": "bytes32"
                 }
               ],
               "stateMutability": "view",
@@ -485,6 +477,19 @@
               "type": "function"
             },
             {
+              "inputs": [],
+              "name": "totalClaimed",
+              "outputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
               "inputs": [
                 {
                   "internalType": "address",
@@ -518,6 +523,19 @@
               "name": "transferOwnership",
               "outputs": [],
               "stateMutability": "nonpayable",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "uri",
+              "outputs": [
+                {
+                  "internalType": "string",
+                  "name": "",
+                  "type": "string"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -535,7 +553,7 @@
       "chainId": "31337",
       "contracts": {
         "GR14": {
-          "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+          "address": "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
           "abi": [
             {
               "inputs": [],
@@ -554,7 +572,12 @@
             },
             {
               "inputs": [],
-              "name": "invalidClaim",
+              "name": "invalidSignature",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "notInitialized",
               "type": "error"
             },
             {
@@ -674,6 +697,19 @@
               "type": "function"
             },
             {
+              "inputs": [],
+              "name": "approvedSigner",
+              "outputs": [
+                {
+                  "internalType": "address",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
               "inputs": [
                 {
                   "internalType": "address",
@@ -695,9 +731,9 @@
             {
               "inputs": [
                 {
-                  "internalType": "bytes32[]",
-                  "name": "merkleProof",
-                  "type": "bytes32[]"
+                  "internalType": "bytes",
+                  "name": "signature",
+                  "type": "bytes"
                 }
               ],
               "name": "claim",
@@ -771,14 +807,14 @@
             {
               "inputs": [
                 {
-                  "internalType": "bytes32",
-                  "name": "_merkleRoot",
-                  "type": "bytes32"
-                },
-                {
                   "internalType": "string",
                   "name": "_uri",
                   "type": "string"
+                },
+                {
+                  "internalType": "address",
+                  "name": "_approvedSigner",
+                  "type": "address"
                 }
               ],
               "name": "initialize",
@@ -790,19 +826,6 @@
                 }
               ],
               "stateMutability": "nonpayable",
-              "type": "function"
-            },
-            {
-              "inputs": [],
-              "name": "initialized",
-              "outputs": [
-                {
-                  "internalType": "bool",
-                  "name": "",
-                  "type": "bool"
-                }
-              ],
-              "stateMutability": "view",
               "type": "function"
             },
             {
@@ -824,19 +847,6 @@
                   "internalType": "bool",
                   "name": "",
                   "type": "bool"
-                }
-              ],
-              "stateMutability": "view",
-              "type": "function"
-            },
-            {
-              "inputs": [],
-              "name": "merkleRoot",
-              "outputs": [
-                {
-                  "internalType": "bytes32",
-                  "name": "",
-                  "type": "bytes32"
                 }
               ],
               "stateMutability": "view",
@@ -1015,6 +1025,19 @@
               "type": "function"
             },
             {
+              "inputs": [],
+              "name": "totalClaimed",
+              "outputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
               "inputs": [
                 {
                   "internalType": "address",
@@ -1048,6 +1071,19 @@
               "name": "transferOwnership",
               "outputs": [],
               "stateMutability": "nonpayable",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "uri",
+              "outputs": [
+                {
+                  "internalType": "string",
+                  "name": "",
+                  "type": "string"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {

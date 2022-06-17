@@ -33,7 +33,7 @@ export default function Transactor(providerOrSigner: any, gasPrice?: any, ethers
     var notify = null
 
     notify = Notify({
-      dappId: process.env.BLOCKNATIVE_DAPPID, // GET YOUR OWN KEY AT https://account.blocknative.com
+      dappId: process.env.NEXT_BLOCKNATIVE_DAPPID, // GET YOUR OWN KEY AT https://account.blocknative.com
       system: 'ethereum',
       networkId: network.chainId,
       // darkMode: Boolean, // (default: false)

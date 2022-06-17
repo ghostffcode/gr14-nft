@@ -11,7 +11,7 @@ import ContractsProvider from '../providers/ContractsProvider/ContractProvider'
 import { Header, Dev } from '../components'
 
 // const chainList = [chain.hardhat, chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum]
-const chainList = [chain.hardhat]
+const chainList = [chain.rinkeby]
 
 const { chains, provider } = configureChains(chainList, [
   alchemyProvider({ alchemyId: process.env.ALCHEMY }),

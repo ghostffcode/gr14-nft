@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useAccount, useSigner } from 'wagmi'
 import { useContractReader } from 'eth-hooks/useContractReader'
 import { useContracts } from '../providers/ContractsProvider/ContractProvider'
@@ -7,35 +7,53 @@ import dynamic from 'next/dynamic'
 import axios from 'axios'
 import Transactor from '../utils/Transactor'
 
-const Init: FC = () => {
+const Initialize: FC = () => {
+  const [adminSigner, setAdminSigner] = useState<string>('')
   const [uri, setURI] = useState<string>('')
 
-  // const { data: user } = useAccount();
-  const contracts = useContracts()
   const { data: signer } = useSigner()
-
   const { data: admin } = useAccount()
+  const contracts = useContracts()
+
   const tx = Transactor(signer)
-  const owner = useContractReader(contracts.readContracts, 'GR14', 'owner')
-  const intialized = useContractReader(contracts.readContracts, 'GR14', 'initialized')
+  const owner: string = useContractReader(contracts.readContracts, 'GR14', 'owner') || ''
+  const approvedSigner: string = useContractReader(contracts.readContracts, 'GR14', 'approvedSigner') || ''
 
   const isOwner = admin?.address === owner
 
   const handleInitialize = async (e: any) => {
     e.preventDefault()
 
-    // calculate proof from server
-    const { data } = await axios.get(`/api/getRoot`)
-    const { merkleRoot } = data
-
-    const res = await tx(contracts.writeContracts.GR14.initialize(merkleRoot, uri))
+    const res = await tx(contracts.writeContracts.GR14.initialize(uri, adminSigner))
 
     console.log(res)
   }
 
+  const loadAdminSigner = async () => {
+    // calculate proof from server
+    const { data } = await axios.get(`/api/signer`)
+    const { address } = data
+
+    setAdminSigner(address)
+  }
+
+  useEffect(() => {
+    loadAdminSigner()
+  }, [])
+
+  if (adminSigner.length == 0) {
+    return (
+      <div key="admin-signer" className="flex flex-1 flex-col w-full mt-64 items-center justify-center">
+        <div id="initialized" className="text-center">
+          <div>Loading...</div>
+        </div>
+      </div>
+    )
+  }
+
   if (!isOwner) {
     return (
-      <div className="flex flex-1 flex-col w-full mt-64 items-center justify-center">
+      <div key="owner" className="flex flex-1 flex-col w-full mt-64 items-center justify-center">
         <div id="notOwner" className="text-center">
           <div>This is an Admin only view.</div>
           <div>If you are the admin, connect your wallet to get started.</div>
@@ -51,9 +69,9 @@ const Init: FC = () => {
     )
   }
 
-  if (intialized) {
+  if (approvedSigner.toLowerCase() === adminSigner.toLocaleLowerCase()) {
     return (
-      <div className="flex flex-1 flex-col w-full mt-64 items-center justify-center">
+      <div key="initialized" className="flex flex-1 flex-col w-full mt-64 items-center justify-center">
         <div id="initialized" className="text-center">
           <div>Claims are already active, nothing more to do here.</div>
         </div>
@@ -62,9 +80,17 @@ const Init: FC = () => {
   }
 
   return (
-    <div className="flex flex-1 flex-col w-full items-center justify-center">
+    <div key="admin-view" className="flex flex-1 flex-col w-full items-center justify-center">
       <div className="max-w-xl w-full mx-auto">
         <form className="w-full" onSubmit={handleInitialize}>
+          <div className="flex items-center mb-4 italic">
+            <span className="mr-2">Initializer:</span>
+            <span className="text-sm">{owner}</span>
+          </div>
+          <div className="flex items-center mb-4 italic">
+            <span className="mr-2">Admin signer Address:</span>
+            <span className="text-sm">{adminSigner}</span>
+          </div>
           <div className="mb-4">
             <label>
               <div className="mb-2">Base URL for all NFT assets: *</div>
@@ -93,4 +119,4 @@ const Init: FC = () => {
   )
 }
 
-export default Init
+export default Initialize
